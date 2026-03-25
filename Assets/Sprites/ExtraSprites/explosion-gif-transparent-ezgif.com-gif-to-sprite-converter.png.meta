@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 0414c3bc3c459404e9001a847f46bed8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7862355347965696523
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_0
+  - first:
+      213: -5438225592657185633
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_1
+  - first:
+      213: -6475297065951618271
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_2
+  - first:
+      213: 8563673094080747170
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_3
+  - first:
+      213: -6086865935385623058
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_4
+  - first:
+      213: 5379499089691990880
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_5
+  - first:
+      213: 3315866572275965816
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_6
+  - first:
+      213: 7301357588124871682
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_7
+  - first:
+      213: -811509334669707478
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_8
+  - first:
+      213: -7219703693664261909
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_9
+  - first:
+      213: 4943905596291495523
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_10
+  - first:
+      213: 4732389542799742889
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_11
+  - first:
+      213: -5699777581582599027
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_12
+  - first:
+      213: -3768782015608241816
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_13
+  - first:
+      213: -3061943536110493055
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_14
+  - first:
+      213: 2682807505083185165
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_15
+  - first:
+      213: -3290510692789103043
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_16
+  - first:
+      213: 3157988491500613017
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_17
+  - first:
+      213: 6784686891817612887
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_18
+  - first:
+      213: -8701528512842959304
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_19
+  - first:
+      213: 640680863831395768
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_20
+  - first:
+      213: 4735760994797612501
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_21
+  - first:
+      213: -1772825713917290112
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_22
+  - first:
+      213: 660619371824772082
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_23
+  - first:
+      213: -1928180968320543010
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_24
+  - first:
+      213: 3090614862390912776
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_25
+  - first:
+      213: 6298580414484504935
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_26
+  - first:
+      213: -4096659607053312489
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_27
+  - first:
+      213: 7349241381123233392
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_28
+  - first:
+      213: 5808654178189033248
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_29
+  - first:
+      213: 189332046067191891
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_30
+  - first:
+      213: 3007962728923179098
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_31
+  - first:
+      213: -5488069641574932455
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_32
+  - first:
+      213: -5650883972032479253
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_33
+  - first:
+      213: -528353923425005081
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_34
+  - first:
+      213: -8071815617817083653
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_35
+  - first:
+      213: -5271671390001644933
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_36
+  - first:
+      213: 6477387024033097862
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_37
+  - first:
+      213: 1258124497560075107
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_38
+  - first:
+      213: -8341737541890915734
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_39
+  - first:
+      213: -55284057198151685
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_40
+  - first:
+      213: 1626993414558986694
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_41
+  - first:
+      213: -3120616691392925802
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_42
+  - first:
+      213: -5027592844327005056
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_43
+  - first:
+      213: 5012440519615946580
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_44
+  - first:
+      213: 7379659602309068114
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_45
+  - first:
+      213: -2539356751241586705
+    second: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0a536d4882bc1d60800000000000000
+      internalID: 7862355347965696523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_1
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94fa3de2aa8784b0800000000000000
+      internalID: -5438225592657185633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b13d840af1326a0800000000000000
+      internalID: -6475297065951618271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_3
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6d0498e4748d670800000000000000
+      internalID: 8563673094080747170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_4
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee50aed6eab178ba0800000000000000
+      internalID: -6086865935385623058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06bd0a69be1d7aa40800000000000000
+      internalID: 5379499089691990880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_6
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87fd91b4413540e20800000000000000
+      internalID: 3315866572275965816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_7
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20c294aca02a35560800000000000000
+      internalID: 7301357588124871682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_8
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 200
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2739174f80fcb4f0800000000000000
+      internalID: -811509334669707478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be8e0930eb57ecb90800000000000000
+      internalID: -7219703693664261909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 366350622f74c9440800000000000000
+      internalID: 4943905596291495523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_11
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a71a554733dca140800000000000000
+      internalID: 4732389542799742889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_12
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8cb80ffc7256e0b0800000000000000
+      internalID: -5699777581582599027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_13
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8614ac389b892bbc0800000000000000
+      internalID: -3768782015608241816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_14
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 182a4d7a39ac185d0800000000000000
+      internalID: -3061943536110493055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_15
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d083c35363f3b3520800000000000000
+      internalID: 2682807505083185165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_16
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 120
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d365ea275f1c552d0800000000000000
+      internalID: -3290510692789103043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: fdfbb875b061d384096d28f3317af94a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":120.0,"y":200.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_0: 7862355347965696523
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_1: -5438225592657185633
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_10: 4943905596291495523
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_11: 4732389542799742889
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_12: -5699777581582599027
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_13: -3768782015608241816
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_14: -3061943536110493055
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_15: 2682807505083185165
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_16: -3290510692789103043
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_2: -6475297065951618271
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_3: 8563673094080747170
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_4: -6086865935385623058
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_5: 5379499089691990880
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_6: 3315866572275965816
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_7: 7301357588124871682
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_8: -811509334669707478
+      explosion-gif-transparent-ezgif.com-gif-to-sprite-converter_9: -7219703693664261909
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
