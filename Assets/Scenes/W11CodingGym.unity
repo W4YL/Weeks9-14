@@ -10333,6 +10333,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb0ee2b442f7fde4c83a8ff53467c5e6, type: 3}
   - {fileID: 8300000, guid: 1109f5658aefb4847a6472300f8d03c2, type: 3}
   - {fileID: 8300000, guid: ab38492fecd4a2e4b95fd62cba06e4cf, type: 3}
+  knightAnimator: {fileID: 1670345742}
+  movement: {x: 0, y: 0}
+  speed: 4
 --- !u!95 &1670345742
 Animator:
   serializedVersion: 7
@@ -10428,8 +10431,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1229860772}
-  - {fileID: 392737946}
   - {fileID: 624413566}
+  - {fileID: 392737946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1670345745
