@@ -19,12 +19,16 @@ public class KnightController : MonoBehaviour
     Coroutine movePlayerCoroutine;
     bool coroutining = false;
 
+    int facingDirection = 1;
+
     public AnimationCurve moveCurve;
+
+    public Vector2 flipScale;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        flipScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -32,6 +36,9 @@ public class KnightController : MonoBehaviour
     {
         //transform.position += (Vector3)movement * speed * Time.deltaTime;
         //transform.position = movement;
+
+        flipScale.x = facingDirection;
+        transform.localScale = flipScale;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -76,8 +83,21 @@ public class KnightController : MonoBehaviour
             t += Time.deltaTime / Vector2.Distance(startPos, endPos) * speed;
             transform.position = Vector2.Lerp(startPos, endPos, t);
 
-            yield return null;
+            knightAnimator.SetBool("isMoving", true);
+
+            if (startPos.x > endPos.x)
+            {
+                facingDirection = -1;
+            }
+            else if (startPos.x < endPos.x)
+            {
+                facingDirection = 1;
+            }
+
+                yield return null;
         }
+
+        knightAnimator.SetBool("isMoving", false);
         movement = savedPos;
 
         coroutining = false;
