@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +13,13 @@ public class KnightController : MonoBehaviour
 
     Vector2 inputVector;
     public Vector2 movement;
+    public Vector2 mousePos;
+    public Vector2 savedPos;
     public float speed = 4;
+    Coroutine movePlayerCoroutine;
+    bool coroutining = false;
+
+    public AnimationCurve moveCurve;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,27 +30,57 @@ public class KnightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
+        //transform.position += (Vector3)movement * speed * Time.deltaTime;
+        //transform.position = movement;
     }
 
-    void GetInput()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        //Get input as a Vector2 where 0 is no input, 1 is input
-        inputVector = Vector2.zero;
+        movement = context.ReadValue<Vector2>();
+    }
 
-        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
-        {
-            //move left
-            inputVector.x -= 1;
-        }
-        if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
-        {
-            //move right
-            inputVector.x += 1;
-        }
+    public void OnPoint(InputAction.CallbackContext context)
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
+    }
 
-        //multiply input by speed and Time
-        movement = inputVector * speed * Time.deltaTime;
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            StartPlayerMovement();
+        }
+    }
+
+    public void StartPlayerMovement()
+    {
+        if (!coroutining)
+        {
+            movePlayerCoroutine = StartCoroutine(MoveToPosition());
+        }
+    }
+
+    IEnumerator MoveToPosition()
+    {
+        coroutining = true;
+        savedPos = mousePos;
+
+        Debug.Log("Coroutine called");
+        float t = 0;
+
+        Vector2 startPos = movement;
+        Vector2 endPos = savedPos;
+
+        while (movement != savedPos && t < 1)
+        {
+            t += Time.deltaTime / Vector2.Distance(startPos, endPos) * speed;
+            transform.position = Vector2.Lerp(startPos, endPos, t);
+
+            yield return null;
+        }
+        movement = savedPos;
+
+        coroutining = false;
     }
 
     public void FootStep()
