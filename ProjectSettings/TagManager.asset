@@ -38,8 +38,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2892235309
+    locked: 0
   - name: ParticleUnderlay
     uniqueID: 2890056099
+    locked: 0
+  - name: Tiles
+    uniqueID: 2425875763
     locked: 0
   - name: Default
     uniqueID: 0
