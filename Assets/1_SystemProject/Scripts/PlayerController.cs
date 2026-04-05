@@ -103,22 +103,22 @@ public class PlayerController : MonoBehaviour
         if (context.started && isGrounded)
         {
             //Give jump velocity on initial button press + when the player is on the ground
-            velocity.y += jumpHeight;
+            velocity.y = jumpHeight;
 
-            if (dashCoroutining)
+            if (dashCoroutining && dashCharge >= 1f)
             {
                 //Enable dash jumping if input performed during dash duration
                 dashJumping = true;
 
                 //Consume one extra dash charge
-                dashCharge--;
+                dashCharge -= 1f;
             }
         }
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.started && canDash &&!dashCoroutining)
+        if (context.started && canDash && !dashCoroutining)
         {
             //Start dash coroutine when there's charges left + if player isn't currently dashing
             StartCoroutine(DashAction());
@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Consume one dash charge
-        dashCharge--;
+        dashCharge -= 1f;
 
         //Disable dash state
         dashCoroutining = false;
