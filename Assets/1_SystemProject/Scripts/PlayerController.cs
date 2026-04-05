@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,12 +12,21 @@ public class PlayerController : MonoBehaviour
 
     public Transform cameraLock;
 
-    public float speed = 5;
+
     public Vector2 movement;
     public Vector2 velocity;
-    public float gravity = 1;
+
+    public float speed = 5;
+    public float gravity = 18.6f;
     public float jumpHeight = 5;
+    public float dashPower = 10;
+    public float dashTime = 0.5f;
+    public int facingDirection = 1;
+
     public bool isGrounded;
+    public bool canDash;
+
+    bool dashCoroutining = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,14 +41,28 @@ public class PlayerController : MonoBehaviour
         //newPosition.x += movement.x * speed * Time.deltaTime;
         //transform.position = newPosition;
 
-        velocity.x = movement.x * speed;
+        if (!dashCoroutining)
+        {
+            velocity.x = movement.x * speed;
+        }
 
         if (!isGrounded)
+        {
             velocity.y -= gravity * Time.deltaTime;
+        }
 
         transform.position += (Vector3)(velocity * Time.deltaTime);
 
         isGrounded = false;
+
+        if (movement.x > 0)
+        {
+            facingDirection = 1;
+        }
+        else if (movement.x < 0)
+        {
+            facingDirection = -1;
+        }
 
         HitboxCheck();
 
@@ -50,15 +74,46 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        movement = context.ReadValue<Vector2>();
+        if (!dashCoroutining)
+        {
+            movement = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (isGrounded)
+        if (context.started && isGrounded)
         {
             velocity.y += jumpHeight;
         }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+
+        if (context.started && !dashCoroutining)
+        {
+            //Debug.Log("Dash!");
+
+            StartCoroutine(DashAction());
+        }
+    }
+
+    IEnumerator DashAction()
+    {
+        dashCoroutining = true;
+        float dashTimer = dashTime;
+
+        while (dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+            velocity.x = facingDirection * dashPower;
+            velocity.y = 0;
+
+            yield return null;
+        }
+
+        dashCoroutining = false;
     }
 
     public void HitboxCheck()
