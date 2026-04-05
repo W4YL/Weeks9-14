@@ -5,11 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public SpriteRenderer playerHitbox;
-    public SpriteRenderer hbBottomCheck;
-    public SpriteRenderer hbLeftCheck;
-    public SpriteRenderer hbRightCheck;
-    public List<SpriteRenderer> environmentHitbox;
-    public List<Transform> environmentHitboxTransform;
+    public SpriteRenderer groundHitbox;
+    public SpriteRenderer leftWallHitbox;
+    public SpriteRenderer rightWallHitbox;
 
     public Transform cameraLock;
 
@@ -56,45 +54,35 @@ public class PlayerController : MonoBehaviour
 
     public void HitboxCheck()
     {
-        foreach (SpriteRenderer hbSr in environmentHitbox)
+        if (playerHitbox.bounds.Intersects(groundHitbox.bounds))
         {
-            if (playerHitbox.bounds.Intersects(hbSr.bounds))
-            {
-                if (hbBottomCheck.bounds.Intersects(hbSr.bounds))
-                {
-                    velocity.y = 0;
-                    isGrounded = true;
+            velocity.y = 0;
+            isGrounded = true;
 
+            Vector2 groundHeight = transform.position;
+            groundHeight.y = -7.5f;
 
-                    Transform hbTr = hbSr.transform;
+            transform.position = groundHeight;
+        }
 
-                    Vector2 groundHeight = transform.position;
-                    groundHeight.y = hbSr.bounds.max.y + hbTr.localScale.y / 2;
-                    transform.position = groundHeight;
-                }
+        if (playerHitbox.bounds.Intersects(leftWallHitbox.bounds))
+        {
+            velocity.x = 0;
 
-                else if (hbLeftCheck.bounds.Intersects(hbSr.bounds))
-                {
-                    velocity.x = 0;
+            Vector2 leftBoundary = transform.position;
+            leftBoundary.x = -38.65f;
 
-                    Transform hbTr = hbSr.transform;
+            transform.position = leftBoundary;
+        }
 
-                    Vector2 wallRestraintL = transform.position;
-                    wallRestraintL.x = hbSr.bounds.max.x + hbTr.localScale.x / 4;
-                    transform.position = wallRestraintL;
-                }
+        if (playerHitbox.bounds.Intersects(rightWallHitbox.bounds))
+        {
+            velocity.x = 0;
 
-                else if (hbRightCheck.bounds.Intersects(hbSr.bounds))
-                {
-                    velocity.x = 0;
+            Vector2 rightBoundary = transform.position;
+            rightBoundary.x = 38.65f;
 
-                    Transform hbTr = hbSr.transform;
-
-                    Vector2 wallRestraintR = transform.position;
-                    wallRestraintR.x = hbSr.bounds.max.x - hbTr.localScale.x / 4;
-                    transform.position = wallRestraintR;
-                }
-            }
+            transform.position = rightBoundary;
         }
     }
 }
