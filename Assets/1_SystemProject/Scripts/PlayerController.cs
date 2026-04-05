@@ -1,32 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //Sprite hitbox references
     public SpriteRenderer playerHitbox;
     public SpriteRenderer groundHitbox;
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
 
+    //Horizontal camera reference point
     public Transform cameraLock;
 
-
+    //General movement
     public Vector2 movement;
     public Vector2 velocity;
 
+    //State checks
+    public bool isGrounded = false;
+    public bool canDash = false;
+    public bool dashCoroutining = false;
+    public bool dashJumping = false;
+    public int facingDirection = 1;
+    public float dashCharge = 3;
+
+    //Balancing stats
     public float speed = 5;
     public float gravity = 18.6f;
     public float jumpHeight = 5;
     public float dashPower = 10;
     public float dashTime = 0.5f;
-    public int facingDirection = 1;
-
-    public bool isGrounded = false;
-    public bool canDash = false;
-    bool dashCoroutining = false;
-    public bool dashJumping = false;
+    public float dashCahrgingTime = 1;
+    public int maxDashCharge = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,29 +45,43 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vector2 newPosition = transform.position;
-        //newPosition.x += movement.x * speed * Time.deltaTime;
-        //transform.position = newPosition;
+        //For cleaner conditional management
+        ConditionalManager();
 
-        if (!dashCoroutining)
+        //For moving the camera reference point
+        CameraReference();
+
+        //For recharging dashess
+        DashChargeSystem();
+
+        //Add velocity to player position
+        transform.position += (Vector3)(velocity * Time.deltaTime);
+
+        //For hitbox checking
+        HitboxCheck();
+    }
+
+    public void ConditionalManager()
+    {
+        //Give player velocity when not performing special actions
+        if (!dashCoroutining && !dashJumping)
         {
             velocity.x = movement.x * speed;
         }
 
+        //Let player be affected by gravity when not on the ground
         if (!isGrounded)
         {
             velocity.y -= gravity * Time.deltaTime;
         }
 
+        //Save dashing velocity when dash jumping
         if (dashJumping)
         {
             velocity.x = facingDirection * dashPower;
         }
 
-        transform.position += (Vector3)(velocity * Time.deltaTime);
-
-        isGrounded = false;
-
+        //Save facing direction depending on the last movement direction
         if (movement.x > 0)
         {
             facingDirection = 1;
@@ -68,99 +90,152 @@ public class PlayerController : MonoBehaviour
         {
             facingDirection = -1;
         }
-
-        HitboxCheck();
-
-        Vector2 newCameraPos;
-        newCameraPos.y = cameraLock.position.y;
-        newCameraPos.x = transform.position.x;
-        cameraLock.position = newCameraPos;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!dashCoroutining)
-        {
-            movement = context.ReadValue<Vector2>();
-        }
+        //Assign movement value on input
+        movement = context.ReadValue<Vector2>();
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started && isGrounded)
         {
+            //Give jump velocity on initial button press + when the player is on the ground
             velocity.y += jumpHeight;
 
             if (dashCoroutining)
             {
+                //Enable dash jumping if input performed during dash duration
                 dashJumping = true;
+
+                //Consume one extra dash charge
+                dashCharge--;
             }
         }
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-
-        if (context.started && !dashCoroutining)
+        if (context.started && canDash &&!dashCoroutining)
         {
-            //Debug.Log("Dash!");
-
+            //Start dash coroutine when there's charges left + if player isn't currently dashing
             StartCoroutine(DashAction());
         }
     }
 
     IEnumerator DashAction()
     {
+        //Enable dash state
         dashCoroutining = true;
+
+        //Assign dash duration
         float dashTimer = dashTime;
 
+        //Loop starts
         while (dashTimer > 0)
         {
+            //Dash timer countdown
             dashTimer -= Time.deltaTime;
+
+            //Assign constant velocity based on the facing direction
             velocity.x = facingDirection * dashPower;
 
             if (!dashJumping)
             {
+                //Disable y velocity unless a dash jump is being performed
                 velocity.y = 0;
             }
 
             yield return null;
         }
 
+        //Consume one dash charge
+        dashCharge--;
+
+        //Disable dash state
         dashCoroutining = false;
+    }
+
+    public void DashChargeSystem()
+    {
+        if (dashCharge < maxDashCharge && !dashCoroutining)
+        {
+            //Recharges dash when below maximum charges + isn't dashing
+            dashCharge += dashCahrgingTime * Time.deltaTime;
+        }
+        else if (dashCharge >= maxDashCharge)
+        {
+            //Locks value at max charges in case of overflow
+            dashCharge = maxDashCharge;
+        }
+
+        if (dashCharge >= 1)
+        {
+            //Enable dash when player has more than one charge
+            canDash = true;
+        }
+        else if (dashCharge < 1)
+        {
+            //Disable dash when below
+            canDash = false;
+        }
+    }
+
+    public void CameraReference()
+    {
+        //Camera reference object transform mirrors the player x position
+        Vector2 newCameraPos;
+        newCameraPos.y = cameraLock.position.y;
+        newCameraPos.x = transform.position.x;
+        cameraLock.position = newCameraPos;
     }
 
     public void HitboxCheck()
     {
+        //When player hitbox intersects with the ground
         if (playerHitbox.bounds.Intersects(groundHitbox.bounds))
         {
+            //Zero out velocity
             velocity.y = 0;
+
+            //Enable grounded state
             isGrounded = true;
+
+            //Stop dash jumping velocity
             dashJumping = false;
 
+            //Lock player to ground height
             Vector2 groundHeight = transform.position;
             groundHeight.y = -7.5f;
-
             transform.position = groundHeight;
         }
+        else
+        {
+            isGrounded = false;
+        }
 
+        //When player hitbox intersects with the left wall
         if (playerHitbox.bounds.Intersects(leftWallHitbox.bounds))
         {
+            //Zero out velocity
             velocity.x = 0;
 
+            //Lock player to right of the left wall
             Vector2 leftBoundary = transform.position;
             leftBoundary.x = -38.65f;
-
             transform.position = leftBoundary;
         }
 
         if (playerHitbox.bounds.Intersects(rightWallHitbox.bounds))
         {
+            //Zero out velocity
             velocity.x = 0;
 
+            //Lock player to left of the right wall
             Vector2 rightBoundary = transform.position;
             rightBoundary.x = 38.65f;
-
             transform.position = rightBoundary;
         }
     }

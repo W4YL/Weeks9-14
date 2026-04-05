@@ -12078,14 +12078,15 @@ MonoBehaviour:
   cameraLock: {fileID: 377273479}
   movement: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
-  speed: 8
+  speed: 6
   gravity: 18.6
-  jumpHeight: 10
-  dashPower: 15
+  jumpHeight: 8
+  dashPower: 12
   dashTime: 0.2
   facingDirection: 1
   isGrounded: 0
   canDash: 0
+  dashJumping: 0
 --- !u!1 &2019427974
 GameObject:
   m_ObjectHideFlags: 0
