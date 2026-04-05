@@ -68,7 +68,7 @@ public class SlimeBehaviour : MonoBehaviour
         if (jumpTimer <= 0)
         {
             isGrounded = false;
-            velocity.y = jumpPower;
+            velocity.y = jumpPower * Random.Range(0.8f, 1.2f);
             velocity.x = jumpLength * facingDirection;
             jumpTimer = jumpCooldown;
         }
