@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -24,6 +22,12 @@ public class PlayerController : MonoBehaviour
     public bool canDash = false;
     public bool dashCoroutining = false;
     public bool dashJumping = false;
+    public bool slideCoroutining = false;
+    public bool slideJumping = false;
+    public bool slamCoroutining = false;
+    public bool slamJumpingCoroutine = false;
+    public bool slamJumping = false;
+    public bool canSlamJump = false;
     public int facingDirection = 1;
     public float dashCharge = 3;
 
@@ -34,7 +38,13 @@ public class PlayerController : MonoBehaviour
     public float dashPower = 10;
     public float dashTime = 0.5f;
     public float dashCahrgingTime = 1;
+    public float slidePower = 1;
+    public float slamPower = 1;
+    public float slamJumpWindowTime = 1;
+    public float slamJumpMultiplier = 1;
     public int maxDashCharge = 3;
+
+    public bool movementBlock;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,30 +73,37 @@ public class PlayerController : MonoBehaviour
 
     public void ConditionalManager()
     {
+        movementBlock = !dashCoroutining && !dashJumping && !slideCoroutining && !slideJumping && !slamCoroutining;
+
         //Give player velocity when not performing special actions
-        if (!dashCoroutining && !dashJumping)
+        if (movementBlock)
         {
             velocity.x = movement.x * speed;
         }
 
-        //Let player be affected by gravity when not on the ground
-        if (!isGrounded)
+        //Let player be affected by gravity when not on the ground + not slamming
+        if (!isGrounded && !slamCoroutining)
         {
             velocity.y -= gravity * Time.deltaTime;
         }
 
-        //Save dashing velocity when dash jumping
-        if (dashJumping)
+        //Save dashing velocity when dash jumping (unless inturrupted by slam
+        if (dashJumping && !slamCoroutining)
         {
             velocity.x = facingDirection * dashPower;
         }
 
-        //Save facing direction depending on the last movement direction
-        if (movement.x > 0)
+        if (slideJumping && !slamCoroutining)
+        {
+            velocity.x = facingDirection * slidePower;
+        }
+
+        //Save facing direction depending on the last movement direction + when not performing special action
+        if (movement.x > 0 && movementBlock)
         {
             facingDirection = 1;
         }
-        else if (movement.x < 0)
+        else if (movement.x < 0 && movementBlock)
         {
             facingDirection = -1;
         }
@@ -102,8 +119,15 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && isGrounded)
         {
-            //Give jump velocity on initial button press + when the player is on the ground
-            velocity.y = jumpHeight;
+            if (canSlamJump)
+            {
+                velocity.y = jumpHeight * slamJumpMultiplier;
+            }
+            else
+            {
+                //Give jump velocity on initial button press + when the player is on the ground
+                velocity.y = jumpHeight;
+            }
 
             if (dashCoroutining && dashCharge >= 1f)
             {
@@ -112,6 +136,11 @@ public class PlayerController : MonoBehaviour
 
                 //Consume one extra dash charge
                 dashCharge -= 1f;
+            }
+
+            if (slideCoroutining)
+            {
+                slideJumping = true;
             }
         }
     }
@@ -122,6 +151,26 @@ public class PlayerController : MonoBehaviour
         {
             //Start dash coroutine when there's charges left + if player isn't currently dashing
             StartCoroutine(DashAction());
+        }
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.started && isGrounded)
+        {
+            slideCoroutining = true;
+            StartCoroutine(SlideAction());
+        }
+        else if (context.started && !isGrounded)
+        {
+            slamCoroutining = true;
+            StartCoroutine(SlamAction());
+        }
+
+        if (context.canceled)
+        {
+            slideCoroutining = false;
+            slamCoroutining = false;
         }
     }
 
@@ -156,6 +205,43 @@ public class PlayerController : MonoBehaviour
 
         //Disable dash state
         dashCoroutining = false;
+    }
+
+    IEnumerator SlideAction()
+    {
+        while (slideCoroutining)
+        {
+            velocity.x = facingDirection * slidePower;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator SlamAction()
+    {
+        while (slamCoroutining)
+        {
+            velocity.y = -slamPower;
+            velocity.x = 0;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator SlamJumpWindow()
+    {
+        float slamJumpTimer = slamJumpWindowTime;
+
+        while (slamJumpTimer > 0)
+        {
+            slamJumpTimer -= Time.deltaTime;
+
+            canSlamJump = true;
+
+            yield return null;
+        }
+
+        canSlamJump = false;
     }
 
     public void DashChargeSystem()
@@ -203,8 +289,15 @@ public class PlayerController : MonoBehaviour
             //Enable grounded state
             isGrounded = true;
 
-            //Stop dash jumping velocity
+            //Stop slam + dash/slide jumping velocity
             dashJumping = false;
+            slideJumping = false;
+
+            if (slamCoroutining)
+            {
+                slamCoroutining = false;
+                StartCoroutine(SlamJumpWindow());
+            }
 
             //Lock player to ground height
             Vector2 groundHeight = transform.position;
