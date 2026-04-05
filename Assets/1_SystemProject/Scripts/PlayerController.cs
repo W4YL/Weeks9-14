@@ -23,10 +23,10 @@ public class PlayerController : MonoBehaviour
     public float dashTime = 0.5f;
     public int facingDirection = 1;
 
-    public bool isGrounded;
-    public bool canDash;
-
+    public bool isGrounded = false;
+    public bool canDash = false;
     bool dashCoroutining = false;
+    public bool dashJumping = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +49,11 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded)
         {
             velocity.y -= gravity * Time.deltaTime;
+        }
+
+        if (dashJumping)
+        {
+            velocity.x = facingDirection * dashPower;
         }
 
         transform.position += (Vector3)(velocity * Time.deltaTime);
@@ -85,6 +90,11 @@ public class PlayerController : MonoBehaviour
         if (context.started && isGrounded)
         {
             velocity.y += jumpHeight;
+
+            if (dashCoroutining)
+            {
+                dashJumping = true;
+            }
         }
     }
 
@@ -108,7 +118,11 @@ public class PlayerController : MonoBehaviour
         {
             dashTimer -= Time.deltaTime;
             velocity.x = facingDirection * dashPower;
-            velocity.y = 0;
+
+            if (!dashJumping)
+            {
+                velocity.y = 0;
+            }
 
             yield return null;
         }
@@ -122,6 +136,7 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = 0;
             isGrounded = true;
+            dashJumping = false;
 
             Vector2 groundHeight = transform.position;
             groundHeight.y = -7.5f;

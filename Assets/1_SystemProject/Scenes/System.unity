@@ -7165,7 +7165,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.51257855, b: 0.51257855, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -11999,7 +11999,19 @@ MonoBehaviour:
     m_ActionId: b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba
     m_ActionName: 'Player/Next[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1980187808}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 641cd816-40e6-41b4-8c3d-04687c349290
     m_ActionName: 'Player/Sprint[/Keyboard/leftShift]'
   - m_PersistentCalls:
@@ -12064,12 +12076,16 @@ MonoBehaviour:
   leftWallHitbox: {fileID: 1545793286}
   rightWallHitbox: {fileID: 909560223}
   cameraLock: {fileID: 377273479}
-  speed: 8
   movement: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
+  speed: 8
   gravity: 18.6
-  jumpHeight: 5
+  jumpHeight: 10
+  dashPower: 15
+  dashTime: 0.2
+  facingDirection: 1
   isGrounded: 0
+  canDash: 0
 --- !u!1 &2019427974
 GameObject:
   m_ObjectHideFlags: 0
