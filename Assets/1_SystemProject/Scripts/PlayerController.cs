@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 movement;
     public Vector2 velocity;
     public float gravity = 1;
+    public float jumpHeight = 5;
     public bool isGrounded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +41,11 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
 
         HitboxCheck();
+
+        Vector2 newCameraPos;
+        newCameraPos.y = cameraLock.position.y;
+        newCameraPos.x = transform.position.x;
+        cameraLock.position = newCameraPos;
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -49,7 +55,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-
+        if (isGrounded)
+        {
+            velocity.y += jumpHeight;
+        }
     }
 
     public void HitboxCheck()
