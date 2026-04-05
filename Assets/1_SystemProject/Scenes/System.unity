@@ -6533,6 +6533,53 @@ Transform:
   - {fileID: 961942574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &83321984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83321986}
+  - component: {fileID: 83321985}
+  m_Layer: 0
+  m_Name: SlimeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &83321985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83321984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92dfea7340bafac438456a2e0d8ae6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeSpawner
+  slimePrefab: {fileID: 1321654114353514114, guid: 1f364a467bd668248be20cffc9a0a635, type: 3}
+  spawnedSlime: {fileID: 0}
+  playerScript: {fileID: 1980187808}
+--- !u!4 &83321986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83321984}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.4, y: -5.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352581508
 GameObject:
   m_ObjectHideFlags: 0
@@ -6649,7 +6696,7 @@ Transform:
   m_GameObject: {fileID: 377273478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: -2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6834,7 +6881,7 @@ Transform:
   m_GameObject: {fileID: 408789570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: -10}
+  m_LocalPosition: {x: 0, y: -2.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12108,9 +12155,10 @@ MonoBehaviour:
   dashPower: 12
   dashTime: 0.2
   dashCahrgingTime: 1
-  slidePower: 10
-  slamPower: 10
-  slamJumpTime: 1
+  slidePower: 8
+  slamPower: 15
+  slamJumpWindowTime: 0.2
+  slamJumpMultiplier: 1.5
   maxDashCharge: 3
   movementBlock: 0
 --- !u!1 &2019427974
@@ -12248,7 +12296,7 @@ Transform:
   m_GameObject: {fileID: 2065933111}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: -10}
+  m_LocalPosition: {x: 0, y: -2.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12265,3 +12313,4 @@ SceneRoots:
   - {fileID: 1358434466}
   - {fileID: 2019427975}
   - {fileID: 60281404}
+  - {fileID: 83321986}

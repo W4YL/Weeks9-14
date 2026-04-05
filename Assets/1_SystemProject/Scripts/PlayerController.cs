@@ -13,11 +13,9 @@ public class PlayerController : MonoBehaviour
     //Horizontal camera reference point
     public Transform cameraLock;
 
-    //General movement
+    //State checks
     public Vector2 movement;
     public Vector2 velocity;
-
-    //State checks
     public bool isGrounded = false;
     public bool canDash = false;
     public bool dashCoroutining = false;
@@ -32,8 +30,8 @@ public class PlayerController : MonoBehaviour
     public float dashCharge = 3;
 
     //Balancing stats
-    public float speed = 5;
     public float gravity = 18.6f;
+    public float speed = 5;
     public float jumpHeight = 5;
     public float dashPower = 10;
     public float dashTime = 0.5f;

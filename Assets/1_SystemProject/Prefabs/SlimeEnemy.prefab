@@ -52,7 +52,13 @@ MonoBehaviour:
   leftWallHitbox: {fileID: 0}
   rightWallHitbox: {fileID: 0}
   velocity: {x: 0, y: 0}
+  isGrounded: 0
+  facingDirection: 0
+  jumpTimer: 0
   gravity: 18.6
+  jumpPower: 5
+  jumpLength: 5
+  jumpCooldown: 2
 --- !u!1 &3979112986948827074
 GameObject:
   m_ObjectHideFlags: 0

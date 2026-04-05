@@ -10,8 +10,14 @@ public class SlimeBehaviour : MonoBehaviour
     public SpriteRenderer rightWallHitbox;
 
     public Vector2 velocity;
+    public bool isGrounded = false;
+    public int facingDirection = 0;
+    public float jumpTimer;
 
     public float gravity = 18.6f;
+    public float jumpPower = 1;
+    public float jumpLength = 1;
+    public float jumpCooldown = 1;
 
     public void InitiateComponents(PlayerController playerScript)
     {
@@ -24,25 +30,60 @@ public class SlimeBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        jumpTimer = jumpCooldown;
     }
 
     // Update is called once per frame
     void Update()
     {
+        ConditionalManager();
+
         transform.position += (Vector3)(velocity * Time.deltaTime);
-        velocity.y -= gravity * Time.deltaTime;
+
+        JumpAction();
 
         HitboxCheck();
+    }
+
+    public void ConditionalManager()
+    {
+        if (!isGrounded)
+        {
+            velocity.y -= gravity * Time.deltaTime;
+        }
+
+        if (playerHitbox.transform.position.x > transform.position.x)
+        {
+            facingDirection = 1;
+        }
+        if (playerHitbox.transform.position.x < transform.position.x)
+        {
+            facingDirection = -1;
+        }
+    }
+
+    public void JumpAction()
+    {
+        jumpTimer -= Time.deltaTime;
+        if (jumpTimer <= 0)
+        {
+            isGrounded = false;
+            velocity.y = jumpPower;
+            velocity.x = jumpLength * facingDirection;
+            jumpTimer = jumpCooldown;
+        }
     }
 
     public void HitboxCheck()
     {
         //When player hitbox intersects with the ground
-        if (slimeHitbox.bounds.Intersects(groundHitbox.bounds))
+        if (slimeHitbox.bounds.Intersects(groundHitbox.bounds) && velocity.y <= 0)
         {
-            //Zero out velocity
-            velocity.y = 0;
+            if (!isGrounded)
+            {
+                isGrounded = true;
+                velocity = Vector2.zero;
+            }
 
             //Lock player to ground height
             Vector2 groundHeight = transform.position;
