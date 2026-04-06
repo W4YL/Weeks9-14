@@ -10,7 +10,7 @@ public class SlimeSpawner : MonoBehaviour
     void Start()
     {
         spawnedSlime = Instantiate(slimePrefab, transform.position, Quaternion.identity);
-        SlimeBehaviour slime = slimePrefab.GetComponent<SlimeBehaviour>();
+        SlimeBehaviour slime = spawnedSlime.GetComponent<SlimeBehaviour>();
 
         slime.InitiateComponents(playerScript);
     }

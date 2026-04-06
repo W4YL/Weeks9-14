@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public bool slamJumpingCoroutine = false;
     public bool slamJumping = false;
     public bool canSlamJump = false;
-    public bool slamDamage = false;
     public bool movementBlock = false;
     public bool isCollidingWithSlime = false;
     public int facingDirection = 1;
@@ -106,11 +105,6 @@ public class PlayerController : MonoBehaviour
             velocity.x = facingDirection * slidePower;
         }
 
-        if (slamDamage)
-        {
-            slamDamage = false;
-        }
-
         //Save facing direction depending on the last movement direction + when not performing special action
         if (movement.x > 0 && movementBlock)
         {
@@ -153,8 +147,14 @@ public class PlayerController : MonoBehaviour
             {
                 isCollidingWithSlime = false;
             }
+        }
+    }
 
-            if (slime.slimeHitbox.bounds.Intersects(playerSlamRange.bounds) && slamDamage)
+    public void DoSlamDamage()
+    {
+        foreach (SlimeBehaviour slime in slimes)
+        {
+            if (slime.slimeHitbox.bounds.Intersects(playerSlamRange.bounds))
             {
                 slime.TakeSlamDamage();
             }
@@ -354,7 +354,7 @@ public class PlayerController : MonoBehaviour
             {
                 slamCoroutining = false;
                 StartCoroutine(SlamJumpWindow());
-                slamDamage = true;
+                DoSlamDamage();
             }
 
             //Lock player to ground height
