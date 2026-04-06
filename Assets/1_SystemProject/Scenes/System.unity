@@ -6688,6 +6688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 352581509}
   - component: {fileID: 352581510}
+  - component: {fileID: 352581511}
   m_Layer: 0
   m_Name: ParallaxL2
   m_TagString: Untagged
@@ -6763,12 +6764,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 32, y: 11.25}
+  m_DrawMode: 2
+  m_Size: {x: 96, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &352581511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352581508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dba367ab281ba47bdacba6a9120d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundParallax
+  cameraObject: {fileID: 408789572}
+  parallaxValue: 0.6
 --- !u!1 &377273478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7253,6 +7268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961942574}
   - component: {fileID: 961942575}
+  - component: {fileID: 961942576}
   m_Layer: 0
   m_Name: ParallaxL3
   m_TagString: Untagged
@@ -7328,12 +7344,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 32, y: 11.25}
+  m_DrawMode: 2
+  m_Size: {x: 96, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &961942576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961942573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dba367ab281ba47bdacba6a9120d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundParallax
+  cameraObject: {fileID: 408789572}
+  parallaxValue: 0.4
 --- !u!1 &1044741801
 GameObject:
   m_ObjectHideFlags: 0
@@ -11809,6 +11839,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285264978}
   - component: {fileID: 1285264979}
+  - component: {fileID: 1285264980}
   m_Layer: 0
   m_Name: ParallaxL1
   m_TagString: Untagged
@@ -11884,12 +11915,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 32, y: 11.25}
+  m_DrawMode: 2
+  m_Size: {x: 96, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1285264980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285264977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dba367ab281ba47bdacba6a9120d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundParallax
+  cameraObject: {fileID: 408789572}
+  parallaxValue: 0.8
 --- !u!1 &1300625715
 GameObject:
   m_ObjectHideFlags: 0
@@ -11900,6 +11945,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1300625716}
   - component: {fileID: 1300625717}
+  - component: {fileID: 1300625719}
+  - component: {fileID: 1300625718}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -11971,7 +12018,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1384022191, guid: 3cb51e80e57f0744288a17046c67a968, type: 3}
+  m_Sprite: {fileID: 2118346550, guid: 64e2028ac9c2bff4ba8adb79a2d058a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11981,6 +12028,43 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1300625718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300625715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14dbabba1c390541b89a5de23beb626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimation
+  player: {fileID: 1980187808}
+  playerAnimator: {fileID: 1300625719}
+  playerSr: {fileID: 1300625717}
+--- !u!95 &1300625719
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300625715}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6f9c58741c2999c4bb95ef4651c4c0c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1358434464
 GameObject:
   m_ObjectHideFlags: 0
@@ -12128,6 +12212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1897960436}
   - component: {fileID: 1897960437}
+  - component: {fileID: 1897960438}
   m_Layer: 0
   m_Name: ParallaxL0
   m_TagString: Untagged
@@ -12203,12 +12288,26 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 32, y: 11.25}
+  m_DrawMode: 2
+  m_Size: {x: 96, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1897960438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897960435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16dba367ab281ba47bdacba6a9120d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BackgroundParallax
+  cameraObject: {fileID: 408789572}
+  parallaxValue: 1
 --- !u!1 &1980187805
 GameObject:
   m_ObjectHideFlags: 0
@@ -12236,7 +12335,7 @@ Transform:
   m_GameObject: {fileID: 1980187805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
