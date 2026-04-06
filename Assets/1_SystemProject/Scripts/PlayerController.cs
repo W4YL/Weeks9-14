@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public bool canSlamJump = false;
     public bool movementBlock = false;
     public bool isCollidingWithSlime = false;
+    public bool highSlam = false;
     public int facingDirection = 1;
     public float dashCharge = 3;
 
@@ -156,9 +157,19 @@ public class PlayerController : MonoBehaviour
         {
             if (slime.slimeHitbox.bounds.Intersects(playerSlamRange.bounds))
             {
-                slime.TakeSlamDamage();
+                if (!highSlam)
+                {
+                    slime.TakeSlamDamage();
+                }
+                else
+                {
+                    slime.TakeSlamDamage(); 
+                    slime.TakeSlamDamage();
+                }
             }
         }
+
+        highSlam = false;
     }
 
     public void wasHit()
@@ -222,12 +233,18 @@ public class PlayerController : MonoBehaviour
         {
             slamCoroutining = true;
             StartCoroutine(SlamAction());
+
+            if (transform.position.y > -5)
+            {
+                highSlam = true;
+            }
         }
 
         if (context.canceled)
         {
             slideCoroutining = false;
             slamCoroutining = false;
+            highSlam = false;
         }
     }
 

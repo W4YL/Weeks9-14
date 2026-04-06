@@ -20,6 +20,7 @@ public class SlimeBehaviour : MonoBehaviour
     public float jumpPower = 1;
     public float jumpLength = 1;
     public float jumpCooldown = 1;
+    public int hitPoints = 2;
 
     public UnityEvent takeDamage;
 
@@ -68,11 +69,21 @@ public class SlimeBehaviour : MonoBehaviour
         {
             facingDirection = -1;
         }
+
+        if (hitPoints <= 0)
+        {
+            Death();
+        }
     }
 
     public void TakeSlamDamage()
     {
         takeDamage.Invoke();
+    }
+
+    public void ReduceHp()
+    {
+        hitPoints--;
     }
 
     public void Death()

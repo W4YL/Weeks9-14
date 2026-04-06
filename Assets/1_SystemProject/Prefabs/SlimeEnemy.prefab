@@ -60,12 +60,13 @@ MonoBehaviour:
   jumpPower: 8
   jumpLength: 4
   jumpCooldown: 2
+  hitPoints: 2
   takeDamage:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1979597690532051431}
         m_TargetAssemblyTypeName: SlimeBehaviour, Assembly-CSharp
-        m_MethodName: Death
+        m_MethodName: ReduceHp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

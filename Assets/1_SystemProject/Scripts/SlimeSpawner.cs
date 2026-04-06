@@ -6,6 +6,11 @@ public class SlimeSpawner : MonoBehaviour
     public GameObject spawnedSlime;
     public PlayerController playerScript;
 
+    public SpriteRenderer spawnZoneLeft;
+    public SpriteRenderer spawnZoneRight;
+
+    public int spawnZone = 2;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
