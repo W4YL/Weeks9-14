@@ -21,6 +21,8 @@ public class SlimeBehaviour : MonoBehaviour
     public float jumpLength = 1;
     public float jumpCooldown = 1;
 
+    public UnityEvent takeDamage;
+
     public void InitiateComponents(PlayerController playerScript)
     {
         playerSubHitbox = playerScript.playerSubHitbox;
@@ -29,7 +31,8 @@ public class SlimeBehaviour : MonoBehaviour
         rightWallHitbox = playerScript.rightWallHitbox;
 
         player = playerScript;
-        player.AddSlimeHitbox(slimeHitbox);
+
+        playerScript.AddSlime(GetComponent<SlimeBehaviour>());
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,11 +53,6 @@ public class SlimeBehaviour : MonoBehaviour
         HitboxCheck();
     }
 
-    private void OnDestroy()
-    {
-        player.RemoveSlimeHitbox(slimeHitbox);
-    }
-
     public void ConditionalManager()
     {
         if (!isGrounded)
@@ -72,6 +70,21 @@ public class SlimeBehaviour : MonoBehaviour
         }
     }
 
+    public void TakeSlamDamage()
+    {
+        takeDamage.Invoke();
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        player.RemoveSlime(GetComponent<SlimeBehaviour>());
+    }
+
     public void JumpAction()
     {
         jumpTimer -= Time.deltaTime;
@@ -82,11 +95,6 @@ public class SlimeBehaviour : MonoBehaviour
             velocity.x = jumpLength * facingDirection;
             jumpTimer = jumpCooldown;
         }
-    }
-
-    public void PlayerCollisionCheck()
-    {
-
     }
 
     public void HitboxCheck()

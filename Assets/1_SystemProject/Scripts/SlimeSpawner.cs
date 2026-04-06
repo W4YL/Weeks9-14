@@ -10,7 +10,9 @@ public class SlimeSpawner : MonoBehaviour
     void Start()
     {
         spawnedSlime = Instantiate(slimePrefab, transform.position, Quaternion.identity);
-        spawnedSlime.GetComponent<SlimeBehaviour>().InitiateComponents(playerScript);
+        SlimeBehaviour slime = slimePrefab.GetComponent<SlimeBehaviour>();
+
+        slime.InitiateComponents(playerScript);
     }
 
     // Update is called once per frame

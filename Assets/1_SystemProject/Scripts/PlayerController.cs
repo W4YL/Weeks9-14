@@ -6,15 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public SpriteRenderer playerSprite;
-
     //Sprite hitbox references
     public SpriteRenderer playerHitbox;
     public SpriteRenderer playerSubHitbox;
+    public SpriteRenderer playerSlamRange;
     public SpriteRenderer groundHitbox;
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
-    public List<SpriteRenderer> slimeHitboxes = new List<SpriteRenderer>();
+    public List<SlimeBehaviour> slimes = new List<SlimeBehaviour>();
 
     //Horizontal camera reference point
     public Transform cameraLock;
@@ -32,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public bool slamJumpingCoroutine = false;
     public bool slamJumping = false;
     public bool canSlamJump = false;
+    public bool slamDamage = false;
     public bool movementBlock = false;
     public bool isCollidingWithSlime = false;
     public int facingDirection = 1;
@@ -51,7 +51,6 @@ public class PlayerController : MonoBehaviour
     public int maxDashCharge = 3;
 
     public UnityEvent gotHit;
-    public UnityEvent slamDamage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -107,6 +106,11 @@ public class PlayerController : MonoBehaviour
             velocity.x = facingDirection * slidePower;
         }
 
+        if (slamDamage)
+        {
+            slamDamage = false;
+        }
+
         //Save facing direction depending on the last movement direction + when not performing special action
         if (movement.x > 0 && movementBlock)
         {
@@ -118,21 +122,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void AddSlimeHitbox(SpriteRenderer slimeHb)
+    public void AddSlime(SlimeBehaviour slime)
     {
-        slimeHitboxes.Add(slimeHb);
+        slimes.Add(slime);
     }
 
-    public void RemoveSlimeHitbox(SpriteRenderer slimeHb)
+    public void RemoveSlime(SlimeBehaviour slime)
     {
-        slimeHitboxes.Remove(slimeHb);
+        slimes.Remove(slime);
     }
 
     public void SlimeCollision()
     {
-        foreach (SpriteRenderer slimeHb in slimeHitboxes)
+        foreach (SlimeBehaviour slime in slimes)
         {
-            if (slimeHb.bounds.Intersects(playerSubHitbox.bounds))
+            if (slime.slimeHitbox.bounds.Intersects(playerSubHitbox.bounds))
             {
                 if (isCollidingWithSlime)
                 {
@@ -148,6 +152,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isCollidingWithSlime = false;
+            }
+
+            if (slime.slimeHitbox.bounds.Intersects(playerSlamRange.bounds) && slamDamage)
+            {
+                slime.TakeSlamDamage();
             }
         }
     }
@@ -345,6 +354,7 @@ public class PlayerController : MonoBehaviour
             {
                 slamCoroutining = false;
                 StartCoroutine(SlamJumpWindow());
+                slamDamage = true;
             }
 
             //Lock player to ground height
