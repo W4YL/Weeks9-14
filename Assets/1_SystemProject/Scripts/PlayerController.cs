@@ -1,14 +1,20 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public SpriteRenderer playerSprite;
+
     //Sprite hitbox references
     public SpriteRenderer playerHitbox;
+    public SpriteRenderer playerSubHitbox;
     public SpriteRenderer groundHitbox;
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
+    public List<SpriteRenderer> slimeHitboxes = new List<SpriteRenderer>();
 
     //Horizontal camera reference point
     public Transform cameraLock;
@@ -26,6 +32,8 @@ public class PlayerController : MonoBehaviour
     public bool slamJumpingCoroutine = false;
     public bool slamJumping = false;
     public bool canSlamJump = false;
+    public bool movementBlock = false;
+    public bool isCollidingWithSlime = false;
     public int facingDirection = 1;
     public float dashCharge = 3;
 
@@ -42,7 +50,8 @@ public class PlayerController : MonoBehaviour
     public float slamJumpMultiplier = 1;
     public int maxDashCharge = 3;
 
-    public bool movementBlock;
+    public UnityEvent gotHit;
+    public UnityEvent slamDamage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -64,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
         //Add velocity to player position
         transform.position += (Vector3)(velocity * Time.deltaTime);
+
+        SlimeCollision();
 
         //For hitbox checking
         HitboxCheck();
@@ -105,6 +116,45 @@ public class PlayerController : MonoBehaviour
         {
             facingDirection = -1;
         }
+    }
+
+    public void AddSlimeHitbox(SpriteRenderer slimeHb)
+    {
+        slimeHitboxes.Add(slimeHb);
+    }
+
+    public void RemoveSlimeHitbox(SpriteRenderer slimeHb)
+    {
+        slimeHitboxes.Remove(slimeHb);
+    }
+
+    public void SlimeCollision()
+    {
+        foreach (SpriteRenderer slimeHb in slimeHitboxes)
+        {
+            if (slimeHb.bounds.Intersects(playerSubHitbox.bounds))
+            {
+                if (isCollidingWithSlime)
+                {
+                    //Is colliding
+                }
+                else
+                {
+                    gotHit.Invoke();
+                }
+
+                isCollidingWithSlime = true;
+            }
+            else
+            {
+                isCollidingWithSlime = false;
+            }
+        }
+    }
+
+    public void wasHit()
+    {
+        Debug.Log("Was hit!");
     }
 
     public void OnMove(InputAction.CallbackContext context)

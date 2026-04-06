@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SlimeBehaviour : MonoBehaviour
 {
     public SpriteRenderer slimeHitbox;
 
-    public SpriteRenderer playerHitbox;
+    public SpriteRenderer playerSubHitbox;
     public SpriteRenderer groundHitbox;
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
+    public PlayerController player;
 
     public Vector2 velocity;
     public bool isGrounded = false;
@@ -21,10 +23,13 @@ public class SlimeBehaviour : MonoBehaviour
 
     public void InitiateComponents(PlayerController playerScript)
     {
-        playerHitbox = playerScript.playerHitbox;
+        playerSubHitbox = playerScript.playerSubHitbox;
         groundHitbox = playerScript.groundHitbox;
         leftWallHitbox = playerScript.leftWallHitbox;
         rightWallHitbox = playerScript.rightWallHitbox;
+
+        player = playerScript;
+        player.AddSlimeHitbox(slimeHitbox);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +50,11 @@ public class SlimeBehaviour : MonoBehaviour
         HitboxCheck();
     }
 
+    private void OnDestroy()
+    {
+        player.RemoveSlimeHitbox(slimeHitbox);
+    }
+
     public void ConditionalManager()
     {
         if (!isGrounded)
@@ -52,11 +62,11 @@ public class SlimeBehaviour : MonoBehaviour
             velocity.y -= gravity * Time.deltaTime;
         }
 
-        if (playerHitbox.transform.position.x > transform.position.x)
+        if (playerSubHitbox.transform.position.x > transform.position.x)
         {
             facingDirection = 1;
         }
-        if (playerHitbox.transform.position.x < transform.position.x)
+        if (playerSubHitbox.transform.position.x < transform.position.x)
         {
             facingDirection = -1;
         }
@@ -72,6 +82,11 @@ public class SlimeBehaviour : MonoBehaviour
             velocity.x = jumpLength * facingDirection;
             jumpTimer = jumpCooldown;
         }
+    }
+
+    public void PlayerCollisionCheck()
+    {
+
     }
 
     public void HitboxCheck()
