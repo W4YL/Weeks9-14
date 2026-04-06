@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
             slamCoroutining = true;
             StartCoroutine(SlamAction());
 
-            if (transform.position.y > -5)
+            if (transform.position.y > -3)
             {
                 highSlam = true;
             }
@@ -376,7 +376,7 @@ public class PlayerController : MonoBehaviour
 
             //Lock player to ground height
             Vector2 groundHeight = transform.position;
-            groundHeight.y = -7.5f;
+            groundHeight.y = -5.5f;
             transform.position = groundHeight;
         }
         else

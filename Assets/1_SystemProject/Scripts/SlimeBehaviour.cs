@@ -10,6 +10,7 @@ public class SlimeBehaviour : MonoBehaviour
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
     public PlayerController player;
+    public SlimeSpawner spawner;
 
     public Vector2 velocity;
     public bool isGrounded = false;
@@ -88,6 +89,7 @@ public class SlimeBehaviour : MonoBehaviour
 
     public void Death()
     {
+        spawner.spawnedSlimes.Remove(gameObject);
         Destroy(gameObject);
     }
 
@@ -121,7 +123,7 @@ public class SlimeBehaviour : MonoBehaviour
 
             //Lock player to ground height
             Vector2 groundHeight = transform.position;
-            groundHeight.y = -7.5f;
+            groundHeight.y = -5.5f;
             transform.position = groundHeight;
         }
 
