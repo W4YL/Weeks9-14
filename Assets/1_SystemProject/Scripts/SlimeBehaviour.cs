@@ -155,8 +155,8 @@ public class SlimeBehaviour : MonoBehaviour
             //Assign horizontal velocity based on the faced direction to jump towards the player
             velocity.x = jumpLength * facingDirection;
 
-            //Reset timer
-            jumpTimer = jumpCooldown;
+            //Reset timer with slight diviations from balanced stat range
+            jumpTimer = jumpCooldown * Random.Range(0.8f, 1.2f);
         }
     }
 
