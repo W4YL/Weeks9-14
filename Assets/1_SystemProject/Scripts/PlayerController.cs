@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     //Horizontal camera reference point
     public Transform cameraLock;
 
-    //Particle parent
+    //Particles
     public Transform particleTransform;
+    public ParticleManager playerParticleScript;
 
     //State checks
     public Vector2 movement;
@@ -370,6 +371,11 @@ public class PlayerController : MonoBehaviour
         {
             //Zero out velocity
             velocity.y = 0;
+
+            if (!isGrounded)
+            {
+                playerParticleScript.PlayLandParticles();
+            }
 
             //Enable grounded state
             isGrounded = true;
