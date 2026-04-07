@@ -28,7 +28,7 @@ public class PlayerAnimation : MonoBehaviour
             playerAnimator.SetBool("isWalking", false);
 
         //Check if player is floating
-        if (player.velocity.y != 0)
+        if (player.velocity.y != 0 && !player.isGrounded)
             playerAnimator.SetBool("isFloating", true);
         else
             playerAnimator.SetBool("isFloating", false);

@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,14 +20,14 @@ public class PlayerController : MonoBehaviour
     //Horizontal camera reference point
     public Transform cameraLock;
 
-    //Particles
+    //Visual effect references
     public Transform particleTransform;
     public ParticleManager playerParticleScript;
     bool slideParticlesPlayed = false;
-
-    //Camera shakes
     public CinemachineImpulseSource groundImpactShake;
+    public CinemachineImpulseSource highImpactShake;
     public CinemachineImpulseSource dashShake;
+    public GameObject screenFlash;
 
     //State checks
     public Vector2 movement;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public float slamPower = 1;
     public float slamJumpWindowTime = 1;
     public float slamJumpMultiplier = 1;
+    public float hitstopDuration = .1f;
     public int maxDashCharge = 3;
 
     //Unity event
@@ -210,15 +212,25 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    StartCoroutine(HitStopTimer());
+                    Time.timeScale = 0;
                     slime.TakeSlamDamage(); 
                     slime.TakeSlamDamage();
                 }
             }
         }
 
+        if (!highSlam)
+        {
+            groundImpactShake.GenerateImpulse();
+        }
+        else
+        {
+            highImpactShake.GenerateImpulse();
+        }
+
         highSlam = false;
         playerParticleScript.PlayImpactParticles();
-        groundImpactShake.GenerateImpulse();
     }
 
     public void wasHit()
@@ -370,6 +382,21 @@ public class PlayerController : MonoBehaviour
         canSlamJump = false;
     }
 
+    IEnumerator HitStopTimer()
+    {
+        float hitstopTimer = hitstopDuration;
+
+        while (hitstopTimer > 0)
+        {
+            hitstopTimer -= Time.unscaledDeltaTime;
+            screenFlash.SetActive(true);
+            yield return null;
+        }
+
+        screenFlash.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void DashChargeSystem()
     {
         if (dashCharge < maxDashCharge && !dashCoroutining)
@@ -417,19 +444,19 @@ public class PlayerController : MonoBehaviour
                 playerParticleScript.PlayLandParticles();
             }
 
-            //Enable grounded state
-            isGrounded = true;
-
-            //Stop slam + dash/slide jumping velocity
-            dashJumping = false;
-            slideJumping = false;
-
             if (slamCoroutining)
             {
                 slamCoroutining = false;
                 StartCoroutine(SlamJumpWindow());
                 DoSlamDamage();
             }
+
+            //Enable grounded state
+            isGrounded = true;
+
+            //Stop slam + dash/slide jumping velocity
+            dashJumping = false;
+            slideJumping = false;
 
             //Lock player to ground height
             Vector2 groundHeight = transform.position;
