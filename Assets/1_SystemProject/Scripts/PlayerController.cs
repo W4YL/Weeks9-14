@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     //Particles
     public Transform particleTransform;
     public ParticleManager playerParticleScript;
+    bool slideParticlesPlayed = false;
 
     //State checks
     public Vector2 movement;
@@ -112,10 +113,37 @@ public class PlayerController : MonoBehaviour
             velocity.x = facingDirection * slidePower;
         }
 
+        if (slideCoroutining && isGrounded)
+        {
+            if (slideParticlesPlayed)
+            {
+
+            }
+            else
+            {
+                playerParticleScript.PlaySlideParticles();
+            }
+
+            slideParticlesPlayed = true;
+        }
+        else
+        {
+            if (slideParticlesPlayed)
+            {
+                playerParticleScript.StopSlideParticles();
+            }
+
+            slideParticlesPlayed = false;
+        }
+
         //Flip particle system
         if (facingDirection == -1)
         {
             particleTransform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            particleTransform.rotation = Quaternion.Euler(0, 0, 0);
         }
 
         //Save facing direction depending on the last movement direction + when not performing special action
@@ -240,6 +268,7 @@ public class PlayerController : MonoBehaviour
         {
             slideCoroutining = true;
             StartCoroutine(SlideAction());
+            playerParticleScript.PlaySlideParticles();
         }
         else if (context.started && !isGrounded)
         {
