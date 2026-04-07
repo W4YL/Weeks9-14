@@ -303,6 +303,9 @@ public class PlayerController : MonoBehaviour
             {
                 //Give player higher jump velocity if chained after a slam
                 velocity.y = jumpHeight * slamJumpMultiplier;
+
+                //Play particle indicators for high slamming 
+                playerParticleScript.PlayHighSlamIndicator();
             }
             else
             {

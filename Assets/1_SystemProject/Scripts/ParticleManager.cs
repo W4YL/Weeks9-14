@@ -14,6 +14,7 @@ public class ParticleManager : MonoBehaviour
     public ParticleSystem impactParticles;
     public ParticleSystem impactParticles2;
     public ParticleSystem hitParticles;
+    public ParticleSystem highSlamParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,5 +83,11 @@ public class ParticleManager : MonoBehaviour
     {
         //Function to play hit particles on unity on hit event
         hitParticles.Play();
+    }
+
+    public void PlayHighSlamIndicator()
+    {
+        //Function to indicate high slam active wiith particles
+        highSlamParticles.Play();
     }
 }
