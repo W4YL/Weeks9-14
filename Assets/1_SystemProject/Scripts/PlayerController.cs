@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -22,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public Transform particleTransform;
     public ParticleManager playerParticleScript;
     bool slideParticlesPlayed = false;
+
+    //Camera shakes
+    public CinemachineImpulseSource groundImpactShake;
+    public CinemachineImpulseSource dashShake;
 
     //State checks
     public Vector2 movement;
@@ -140,10 +145,12 @@ public class PlayerController : MonoBehaviour
         if (facingDirection == -1)
         {
             particleTransform.rotation = Quaternion.Euler(0, 180, 0);
+            dashShake.DefaultVelocity.x = -0.08f;
         }
         else
         {
             particleTransform.rotation = Quaternion.Euler(0, 0, 0);
+            dashShake.DefaultVelocity.x = 0.08f;
         }
 
         //Save facing direction depending on the last movement direction + when not performing special action
@@ -211,6 +218,7 @@ public class PlayerController : MonoBehaviour
 
         highSlam = false;
         playerParticleScript.PlayImpactParticles();
+        groundImpactShake.GenerateImpulse();
     }
 
     public void wasHit()
@@ -260,6 +268,8 @@ public class PlayerController : MonoBehaviour
         {
             //Start dash coroutine when there's charges left + if player isn't currently dashing
             StartCoroutine(DashAction());
+
+            dashShake.GenerateImpulse();
         }
     }
 
