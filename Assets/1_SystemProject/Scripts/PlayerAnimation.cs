@@ -57,5 +57,11 @@ public class PlayerAnimation : MonoBehaviour
             playerAnimator.SetBool("isSlamming", true);
         else
             playerAnimator.SetBool("isSlamming", false);
+
+        //Check hitstop state
+        if (!player.exitHitstopState)
+            playerAnimator.SetBool("isInHitstop", true);
+        else
+            playerAnimator.SetBool("isInHitstop", false);
     }
 }

@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public bool movementBlock = false;
     public bool isCollidingWithSlime = false;
     public bool highSlam = false;
+    public bool exitHitstopState = true;
     public int facingDirection = 1;
     public float dashCharge = 3;
 
@@ -214,8 +215,7 @@ public class PlayerController : MonoBehaviour
                 {
                     StartCoroutine(HitStopTimer());
                     Time.timeScale = 0;
-                    slime.TakeSlamDamage(); 
-                    slime.TakeSlamDamage();
+                    StartCoroutine(PostHitStopFunctions(slime));
                 }
             }
         }
@@ -386,6 +386,8 @@ public class PlayerController : MonoBehaviour
     {
         float hitstopTimer = hitstopDuration;
 
+        exitHitstopState = false;
+
         while (hitstopTimer > 0)
         {
             hitstopTimer -= Time.unscaledDeltaTime;
@@ -395,6 +397,18 @@ public class PlayerController : MonoBehaviour
 
         screenFlash.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    IEnumerator PostHitStopFunctions(SlimeBehaviour slime)
+    {
+        while(!(Time.timeScale == 1))
+        {
+            yield return null;
+        }
+
+        slime.TakeSlamDamage();
+        slime.TakeSlamDamage();
+        exitHitstopState = true;
     }
 
     public void DashChargeSystem()

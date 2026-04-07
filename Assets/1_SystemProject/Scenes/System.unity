@@ -52338,6 +52338,7 @@ MonoBehaviour:
   movementBlock: 0
   isCollidingWithSlime: 0
   highSlam: 0
+  exitHitstopState: 1
   facingDirection: 1
   dashCharge: 3
   gravity: 18.6
@@ -52350,7 +52351,7 @@ MonoBehaviour:
   slamPower: 16
   slamJumpWindowTime: 0.2
   slamJumpMultiplier: 1.5
-  hitstopDuration: 0.5
+  hitstopDuration: 0.3
   maxDashCharge: 3
   gotHit:
     m_PersistentCalls:
