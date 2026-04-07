@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     //Horizontal camera reference point
     public Transform cameraLock;
 
+    //Particle parent
+    public Transform particleTransform;
+
     //State checks
     public Vector2 movement;
     public Vector2 velocity;
@@ -50,12 +53,13 @@ public class PlayerController : MonoBehaviour
     public float slamJumpMultiplier = 1;
     public int maxDashCharge = 3;
 
+    //Unity event
     public UnityEvent gotHit;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
         //For hitbox checking
         HitboxCheck();
+
     }
 
     public void ConditionalManager()
@@ -104,6 +109,12 @@ public class PlayerController : MonoBehaviour
         if (slideJumping && !slamCoroutining)
         {
             velocity.x = facingDirection * slidePower;
+        }
+
+        //Flip particle system
+        if (facingDirection == -1)
+        {
+            particleTransform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         //Save facing direction depending on the last movement direction + when not performing special action
