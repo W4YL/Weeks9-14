@@ -53325,7 +53325,7 @@ MonoBehaviour:
   jumpHeight: 8
   dashPower: 14
   dashTime: 0.2
-  dashCahrgingTime: 1
+  dashChargingTime: 2
   slidePower: 10
   slamPower: 16
   slamJumpWindowTime: 0.2

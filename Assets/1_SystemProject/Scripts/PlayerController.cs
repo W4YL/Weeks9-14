@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public float jumpHeight = 5;
     public float dashPower = 10;
     public float dashTime = 0.5f;
-    public float dashCahrgingTime = 1;
+    public float dashChargingTime = 1;
     public float slidePower = 1;
     public float slamPower = 1;
     public float slamJumpWindowTime = 1;
@@ -290,9 +290,6 @@ public class PlayerController : MonoBehaviour
             {
                 //Enable dash jumping if input performed during dash duration
                 dashJumping = true;
-
-                //Consume one extra dash charge
-                dashCharge -= 1f;
             }
 
             if (slideCoroutining)
@@ -476,7 +473,7 @@ public class PlayerController : MonoBehaviour
         if (dashCharge < maxDashCharge && !dashCoroutining)
         {
             //Recharges dash when below maximum charges + isn't dashing
-            dashCharge += dashCahrgingTime * Time.deltaTime;
+            dashCharge +=  Time.deltaTime / dashChargingTime;
         }
         else if (dashCharge >= maxDashCharge)
         {

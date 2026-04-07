@@ -8,7 +8,10 @@ public class SlimeBehaviour : MonoBehaviour
     public SpriteRenderer slimeHitbox;
     public SpriteRenderer slimeSr;
     public ParticleSystem hitParticles;
+    public ParticleSystem jumpParticles;
+    public ParticleSystem landParticles;
     public GameObject slimeDeathParticles;
+    public Animator slimeAnimator;
 
     //External hitboxes
     public SpriteRenderer playerSubHitbox;
@@ -99,14 +102,17 @@ public class SlimeBehaviour : MonoBehaviour
             Death();
         }
 
-        //Set slime facing direction
-        if (facingDirection < 0)
+        //Set slime facing direction when not jumping
+        if (isGrounded)
         {
-            slimeSr.flipX = false;
-        }
-        else
-        {
-            slimeSr.flipX = true;
+            if (facingDirection < 0)
+            {
+                slimeSr.flipX = false;
+            }
+            else
+            {
+                slimeSr.flipX = true;
+            }
         }
     }
 
@@ -157,6 +163,12 @@ public class SlimeBehaviour : MonoBehaviour
 
             //Reset timer with slight diviations from balanced stat range
             jumpTimer = jumpCooldown * Random.Range(0.8f, 1.2f);
+
+            //Enable jump animation
+            slimeAnimator.SetBool("isJumping", true);
+
+            //Play jump particles
+            jumpParticles.Play();
         }
     }
 
@@ -173,6 +185,12 @@ public class SlimeBehaviour : MonoBehaviour
 
                 //Stop velocity completely
                 velocity = Vector2.zero;
+
+                //Disable jumping animation
+                slimeAnimator.SetBool("isJumping", false);
+
+                //Play land particles
+                landParticles.Play();
             }
 
             //Lock slime to ground height
