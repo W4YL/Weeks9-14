@@ -13,6 +13,7 @@ public class ParticleManager : MonoBehaviour
     public ParticleSystem slamParticles2;
     public ParticleSystem impactParticles;
     public ParticleSystem impactParticles2;
+    public ParticleSystem hitParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,5 +76,11 @@ public class ParticleManager : MonoBehaviour
         //Play two different slam impact particles when becoming grounded during slamming state
         impactParticles.Play();
         impactParticles2.Play();
+    }
+
+    public void PlayHitParticles()
+    {
+        //Function to play hit particles on unity on hit event
+        hitParticles.Play();
     }
 }
