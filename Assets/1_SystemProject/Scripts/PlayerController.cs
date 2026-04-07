@@ -210,6 +210,7 @@ public class PlayerController : MonoBehaviour
         }
 
         highSlam = false;
+        playerParticleScript.PlayImpactParticles();
     }
 
     public void wasHit()

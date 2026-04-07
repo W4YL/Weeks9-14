@@ -10,6 +10,8 @@ public class ParticleManager : MonoBehaviour
     public ParticleSystem slideParticles;
     public ParticleSystem slamParticles;
     public ParticleSystem slamParticles2;
+    public ParticleSystem impactParticles;
+    public ParticleSystem impactParticles2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,5 +60,11 @@ public class ParticleManager : MonoBehaviour
     {
         slamParticles.Play();
         slamParticles2.Play();
+    }
+
+    public void PlayImpactParticles()
+    {
+        impactParticles.Play();
+        impactParticles2.Play();
     }
 }
