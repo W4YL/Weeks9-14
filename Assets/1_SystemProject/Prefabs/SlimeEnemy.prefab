@@ -47,11 +47,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlimeBehaviour
   slimeHitbox: {fileID: 2571083380784846301}
+  slimeSr: {fileID: 8200289838758798773}
   playerSubHitbox: {fileID: 0}
   groundHitbox: {fileID: 0}
   leftWallHitbox: {fileID: 0}
   rightWallHitbox: {fileID: 0}
   player: {fileID: 0}
+  spawner: {fileID: 0}
   velocity: {x: 0, y: 0}
   isGrounded: 0
   facingDirection: 0

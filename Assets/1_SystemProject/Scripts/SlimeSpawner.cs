@@ -6,6 +6,7 @@ public class SlimeSpawner : MonoBehaviour
     public GameObject slimePrefab;
     public List<GameObject> spawnedSlimes = new List<GameObject>();
     public PlayerController player;
+    public SlimeAnimation slimeAnimation;
 
     public SpriteRenderer spawnCheckLeft;
     public SpriteRenderer spawnCheckRight;
@@ -105,7 +106,7 @@ public class SlimeSpawner : MonoBehaviour
         SlimeBehaviour slimeScript = spawnedSlime.GetComponent<SlimeBehaviour>();
         slimeScript.spawner = GetComponent<SlimeSpawner>();
 
-        slimeScript.InitiateComponents(player);
+        slimeScript.InitiateComponents(player, slimeAnimation);
         spawnedSlimes.Add(spawnedSlime);
     }
 }

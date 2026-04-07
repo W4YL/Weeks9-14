@@ -3,12 +3,17 @@ using UnityEngine.Events;
 
 public class SlimeBehaviour : MonoBehaviour
 {
+    //Slime components
     public SpriteRenderer slimeHitbox;
+    public SpriteRenderer slimeSr;
 
+    //External hitboxes
     public SpriteRenderer playerSubHitbox;
     public SpriteRenderer groundHitbox;
     public SpriteRenderer leftWallHitbox;
     public SpriteRenderer rightWallHitbox;
+
+    //External scripts
     public PlayerController player;
     public SlimeSpawner spawner;
 
@@ -25,7 +30,7 @@ public class SlimeBehaviour : MonoBehaviour
 
     public UnityEvent takeDamage;
 
-    public void InitiateComponents(PlayerController playerScript)
+    public void InitiateComponents(PlayerController playerScript, SlimeAnimation animationScript)
     {
         playerSubHitbox = playerScript.playerSubHitbox;
         groundHitbox = playerScript.groundHitbox;
@@ -75,6 +80,11 @@ public class SlimeBehaviour : MonoBehaviour
         {
             Death();
         }
+
+        if (facingDirection < 0)
+            slimeSr.flipX = false;
+        else
+            slimeSr.flipX = true;
     }
 
     public void TakeSlamDamage()
