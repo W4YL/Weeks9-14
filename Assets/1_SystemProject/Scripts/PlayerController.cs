@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
         //Add velocity to player position
         transform.position += (Vector3)(velocity * Time.deltaTime);
 
+        //For checking slime-player collision
         SlimeCollision();
 
         //For hitbox checking
@@ -96,84 +97,93 @@ public class PlayerController : MonoBehaviour
 
     public void ConditionalManager()
     {
+        //A clean bool for blocking movement while performing special actions
         movementBlock = !dashCoroutining && !dashJumping && !slideCoroutining && !slideJumping && !slamCoroutining;
 
-        //Give player velocity when not performing special actions
         if (movementBlock)
         {
+            //Give player velocity when not performing special actions
             velocity.x = movement.x * speed;
         }
 
-        //Let player be affected by gravity when not on the ground + not slamming
         if (!isGrounded && !slamCoroutining)
         {
+            //Let player be affected by gravity when not on the ground + not slamming
             velocity.y -= gravity * Time.deltaTime;
         }
 
-        //Save dashing velocity when dash jumping (unless inturrupted by slam
         if (dashJumping && !slamCoroutining)
         {
+            //Save dashing velocity when dash jumping (unless inturrupted by slam)
             velocity.x = facingDirection * dashPower;
         }
 
         if (slideJumping && !slamCoroutining)
         {
+            //Save sliding velocity when slide jumping (unless interrupted by slam)
             velocity.x = facingDirection * slidePower;
         }
 
+        //Edge conditional for initially hitting the ground while sliding
         if (slideCoroutining && isGrounded)
         {
             if (slideParticlesPlayed)
             {
-
+                //Is currently sliding
             }
             else
             {
+                //Start playing the slide particle loop
                 playerParticleScript.PlaySlideParticles();
             }
 
+            //Is currently sliding on ground (currently playing particles)
             slideParticlesPlayed = true;
         }
         else
         {
             if (slideParticlesPlayed)
             {
+                //Stop playing particles when first stopping the ground sliding state
                 playerParticleScript.StopSlideParticles();
             }
 
+            //Is currently not sliding on ground (no particles)
             slideParticlesPlayed = false;
-        }
-
-        //Flip particle system
-        if (facingDirection == -1)
-        {
-            particleTransform.rotation = Quaternion.Euler(0, 180, 0);
-            dashShake.DefaultVelocity.x = -0.08f;
-        }
-        else
-        {
-            particleTransform.rotation = Quaternion.Euler(0, 0, 0);
-            dashShake.DefaultVelocity.x = 0.08f;
         }
 
         //Save facing direction depending on the last movement direction + when not performing special action
         if (movement.x > 0 && movementBlock)
         {
             facingDirection = 1;
+
+            //Unflip particle system parent when facing right
+            particleTransform.localScale = new Vector2(1, 1);
+
+            //Set dash shake direction
+            dashShake.DefaultVelocity.x = 0.08f;
         }
         else if (movement.x < 0 && movementBlock)
         {
             facingDirection = -1;
+
+            //Flip particle system parent when facing left
+            particleTransform.localScale = new Vector2(-1, 1);
+
+            //Set dash shake direction
+            dashShake.DefaultVelocity.x = -0.08f;
         }
     }
 
     public void AddSlime(SlimeBehaviour slime)
     {
+        //Add spawned slime script
         slimes.Add(slime);
     }
 
     public void RemoveSlime(SlimeBehaviour slime)
     {
+        //Remove destroyed slime script
         slimes.Remove(slime);
     }
 
@@ -181,6 +191,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach (SlimeBehaviour slime in slimes)
         {
+            //Check if any slime are colliding with player
             if (slime.slimeHitbox.bounds.Intersects(playerSubHitbox.bounds))
             {
                 if (isCollidingWithSlime)
@@ -189,13 +200,16 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
+                    //Invoke got hit event on initial contact
                     gotHit.Invoke();
                 }
 
+                //Is currently colliding with slime
                 isCollidingWithSlime = true;
             }
             else
             {
+                //Is not currently colliding with slime
                 isCollidingWithSlime = false;
             }
         }
@@ -205,16 +219,23 @@ public class PlayerController : MonoBehaviour
     {
         foreach (SlimeBehaviour slime in slimes)
         {
+            //If any slimes collides with player's slam range during slam impact check
             if (slime.slimeHitbox.bounds.Intersects(playerSlamRange.bounds))
             {
                 if (!highSlam)
                 {
+                    //Take one damage on normal slam
                     slime.TakeSlamDamage();
                 }
                 else
                 {
+                    //Start hitstop coroutine on high slam
                     StartCoroutine(HitStopTimer());
+
+                    //Freeze time
                     Time.timeScale = 0;
+
+                    //Start post-hitstop coroutine for after hitstop functions
                     StartCoroutine(PostHitStopFunctions(slime));
                 }
             }
@@ -222,19 +243,25 @@ public class PlayerController : MonoBehaviour
 
         if (!highSlam)
         {
+            //Generate subtle shake on normal ground slam
             groundImpactShake.GenerateImpulse();
         }
         else
         {
+            //Generate strong shake on high grond slam
             highImpactShake.GenerateImpulse();
         }
 
+        //Disable high ground slam variable
         highSlam = false;
+
+        //Play ground impact particles
         playerParticleScript.PlayImpactParticles();
     }
 
     public void wasHit()
     {
+        //Placeholder hit response
         Debug.Log("Was hit!");
     }
 
@@ -250,6 +277,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canSlamJump)
             {
+                //Give player higher jump velocity if chained after a slam
                 velocity.y = jumpHeight * slamJumpMultiplier;
             }
             else
@@ -269,6 +297,7 @@ public class PlayerController : MonoBehaviour
 
             if (slideCoroutining)
             {
+                //Enable slide jumping if pressed during slide duration
                 slideJumping = true;
             }
         }
@@ -281,6 +310,7 @@ public class PlayerController : MonoBehaviour
             //Start dash coroutine when there's charges left + if player isn't currently dashing
             StartCoroutine(DashAction());
 
+            //Generate directional screenshake on dash
             dashShake.GenerateImpulse();
         }
     }
@@ -289,25 +319,35 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && isGrounded)
         {
+            //Enter sliding state when pressing ctrl on ground
             slideCoroutining = true;
+
+            //Start sliding coroutine
             StartCoroutine(SlideAction());
-            playerParticleScript.PlaySlideParticles();
         }
         else if (context.started && !isGrounded)
         {
+            //Enter slamming state when pressing ctrl inair
             slamCoroutining = true;
+
+            //Start slamming coroutine
             StartCoroutine(SlamAction());
 
             if (transform.position.y > -3)
             {
+                //Enable high slam variable if above normal jumping height
                 highSlam = true;
             }
         }
 
+        //When releasing ctrl
         if (context.canceled)
         {
+            //Disable slidig and slamming state
             slideCoroutining = false;
             slamCoroutining = false;
+
+            //Cancel high slam
             highSlam = false;
         }
     }
@@ -349,6 +389,7 @@ public class PlayerController : MonoBehaviour
     {
         while (slideCoroutining)
         {
+            //Lock player in facing direction with faster speed when sliding
             velocity.x = facingDirection * slidePower;
 
             yield return null;
@@ -359,6 +400,7 @@ public class PlayerController : MonoBehaviour
     {
         while (slamCoroutining)
         {
+            //Lock player horizontally and give constant downwards velocity when slamming
             velocity.y = -slamPower;
             velocity.x = 0;
 
@@ -368,34 +410,47 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator SlamJumpWindow()
     {
+        //Timer for slam jump interval
         float slamJumpTimer = slamJumpWindowTime;
 
         while (slamJumpTimer > 0)
         {
+            //Timer countdown during loop
             slamJumpTimer -= Time.deltaTime;
 
+            //Allow slam jumping within time
             canSlamJump = true;
 
             yield return null;
         }
 
+        //Disable slam jumping window
         canSlamJump = false;
     }
 
     IEnumerator HitStopTimer()
     {
+        //Timer for hitstop interval 
         float hitstopTimer = hitstopDuration;
 
+        //Conditional to diable animation state transitions during hitstop
         exitHitstopState = false;
 
         while (hitstopTimer > 0)
         {
+            //Decrease unaffected timer during time freeze through the loop
             hitstopTimer -= Time.unscaledDeltaTime;
+
+            //Turns on screen flash UI image
             screenFlash.SetActive(true);
+
             yield return null;
         }
 
+        //Turns off screen flash image after time freeze
         screenFlash.SetActive(false);
+
+        //Set time to normal
         Time.timeScale = 1;
     }
 
@@ -403,11 +458,16 @@ public class PlayerController : MonoBehaviour
     {
         while(!(Time.timeScale == 1))
         {
+            //Runs only after time has been turned back to normal
             yield return null;
         }
 
+        //Damages slime twice for an instant kill
         slime.TakeSlamDamage();
         slime.TakeSlamDamage();
+
+
+        //Unblocks animation state transitions
         exitHitstopState = true;
     }
 
@@ -455,13 +515,20 @@ public class PlayerController : MonoBehaviour
 
             if (!isGrounded)
             {
+                //Play landing particles when player wasn't grounded upon colliding 
                 playerParticleScript.PlayLandParticles();
             }
 
+            //If slamming during ground collision
             if (slamCoroutining)
             {
+                //Disable slamming state
                 slamCoroutining = false;
+
+                //Start slam jump window
                 StartCoroutine(SlamJumpWindow());
+
+                //Deal slam damage
                 DoSlamDamage();
             }
 
@@ -479,6 +546,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //Player is not grounded when not colliding with floor
             isGrounded = false;
         }
 
