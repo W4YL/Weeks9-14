@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public CinemachineImpulseSource groundImpactShake;
     public CinemachineImpulseSource highImpactShake;
     public CinemachineImpulseSource dashShake;
+    public CinemachineImpulseSource hitShake;
     public GameObject screenFlash;
 
     //State checks
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public bool isCollidingWithSlime = false;
     public bool highSlam = false;
     public bool exitHitstopState = true;
+    public bool iFramesActive = false;
     public int facingDirection = 1;
     public float dashCharge = 3;
 
@@ -61,6 +63,8 @@ public class PlayerController : MonoBehaviour
     public float slamJumpWindowTime = 1;
     public float slamJumpMultiplier = 1;
     public float hitstopDuration = .1f;
+    public float knockBackStrength = 2;
+    public float iFrameDuration = 1;
     public int maxDashCharge = 3;
 
     //Unity event
@@ -192,7 +196,7 @@ public class PlayerController : MonoBehaviour
         foreach (SlimeBehaviour slime in slimes)
         {
             //Check if any slime are colliding with player
-            if (slime.slimeHitbox.bounds.Intersects(playerSubHitbox.bounds))
+            if (slime.slimeHitbox.bounds.Intersects(playerSubHitbox.bounds) && !iFramesActive)
             {
                 if (isCollidingWithSlime)
                 {
@@ -261,8 +265,28 @@ public class PlayerController : MonoBehaviour
 
     public void wasHit()
     {
-        //Placeholder hit response
         Debug.Log("Was hit!");
+
+        //Disrupts all special action
+        dashCoroutining = false;
+        dashJumping = false;
+        slideCoroutining = false;
+        slideJumping = false;
+        slamCoroutining = false;
+        highSlam = false;
+        
+        //Zero player velocity
+        velocity = Vector2.zero;
+
+        //Add knockback
+        transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+        velocity.y = knockBackStrength;
+
+        //Add subtle screen shake
+        hitShake.GenerateImpulse();
+
+        //Start iframes
+        StartCoroutine(IFrames(iFrameDuration));
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -466,6 +490,26 @@ public class PlayerController : MonoBehaviour
 
         //Unblocks animation state transitions
         exitHitstopState = true;
+    }
+
+    IEnumerator IFrames(float duration)
+    {
+        //Timer for iframe duration
+        float iFrameTimer = duration;
+
+        //Enable iframes
+        iFramesActive = true;
+
+        while (iFrameTimer > 0)
+        {
+            //Timer countdown
+            iFrameTimer -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        //Disable iframes
+        iFramesActive = false;
     }
 
     public void DashChargeSystem()
