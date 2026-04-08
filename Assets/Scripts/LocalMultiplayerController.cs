@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,11 @@ public class LocalMultiplayerController : MonoBehaviour
     public Vector2 movementInput;
     public float speed = 5f;
     public ParticleSystem hitParticles;
+    public bool isDashing;
+    public float dashDuration = 1;
+    public float dashSpeedMultiplier = 7f;
+
+    public TrailRenderer dashTrail;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +25,15 @@ public class LocalMultiplayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDashing)
+        {
+            speed = dashSpeedMultiplier;
+        }
+        else
+        {
+            speed = 5;
+        }
+
         transform.position += (Vector3)movementInput * speed * Time.deltaTime;
     }
 
@@ -42,6 +57,7 @@ public class LocalMultiplayerController : MonoBehaviour
         if (context.started)
         {
             Debug.Log("dashing");
+            StartCoroutine(DashAction());
 
         }
     }
@@ -50,5 +66,21 @@ public class LocalMultiplayerController : MonoBehaviour
     {
         animator.SetTrigger("Squish");
         hitParticles.Play();
+    }
+
+    IEnumerator DashAction()
+    {
+        float timer = dashDuration;
+        dashTrail.emitting = true;
+
+        isDashing = true;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        isDashing = false;
+
+        dashTrail.emitting = false;
     }
 }

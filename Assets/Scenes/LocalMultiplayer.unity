@@ -446,6 +446,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e9e6cd7843baf5745bd5d09a6e86b077, type: 3}
   - {fileID: 21300000, guid: 3842729797771574e957e7ce1eb05a4d, type: 3}
   players: []
+  playerScripts: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
