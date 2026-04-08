@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 public class LocalMultiplayerManager : MonoBehaviour
 {
     public List<Sprite> playerSprite;
-    public List<PlayerInput> players;
+    public List<LocalMultiplayerController> players;
+    public List<LocalMultiplayerController> playerScripts;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,27 +20,32 @@ public class LocalMultiplayerManager : MonoBehaviour
         
     }
 
-    public void OnPlayerJoin(PlayerInput player)
+    public void OnPlayerJoin(PlayerInput playerInput)
     {
+        LocalMultiplayerController player = playerInput.GetComponent<LocalMultiplayerController>();
+
         players.Add(player);
+        player.manager = this;
 
         SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
-        sr.sprite = playerSprite[player.playerIndex];
-
-        LocalMultiplayerController controller = player.GetComponent<LocalMultiplayerController>();
-        controller.manager = this;
+        sr.sprite = playerSprite[player.playerInput.playerIndex];
     }
 
-    public void PlayerAttacking(PlayerInput attackingPlayer)
+    public void PlayerAttacking(PlayerInput playerInput)
     {
+        LocalMultiplayerController player = playerInput.GetComponent<LocalMultiplayerController>();
+
         for (int i = 0; i < players.Count; i++)
         {
-            if (attackingPlayer != players[i]) continue;
+            if (player == players[i]) continue;
 
-            if (Vector2.Distance(attackingPlayer.transform.position, players[i].transform.position) < 0.5f)
+            if (Vector2.Distance(player.transform.position, players[i].transform.position) < 0.5f)
             {
-                Debug.Log("Player " + attackingPlayer.playerIndex + " hit player " + players[i].playerIndex);
+                Debug.Log("Player " + playerInput.playerIndex + " hit player " + players[i].playerInput.playerIndex);
+
+                players[i].GotHit();
             }
         }
     }
+        
 }
