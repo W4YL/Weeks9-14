@@ -7,6 +7,9 @@ public class BackgroundParallax : MonoBehaviour
 
     //Parallax multiplier 
     public float parallaxValue;
+    public float cloudSpeed = 0;
+
+    float cloudMovement = 0;
 
     //New camera-following position
     Vector2 newPosition;
@@ -21,8 +24,15 @@ public class BackgroundParallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cloudMovement -= Time.deltaTime * cloudSpeed;
+
+        if (cloudMovement <= -77.5f)
+        {
+            cloudMovement = 0;
+        }
+
         //Position follows camera with the public multiplier 
-        newPosition.x = cameraObject.transform.position.x * parallaxValue;
+        newPosition.x = cameraObject.transform.position.x * parallaxValue + cloudMovement;
         transform.position = newPosition;
     }
 }
