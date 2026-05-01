@@ -399,6 +399,8 @@ public class PlayerController : MonoBehaviour
                 velocity.y = 0;
             }
 
+            iFramesActive = true;
+
             yield return null;
         }
 
@@ -407,6 +409,8 @@ public class PlayerController : MonoBehaviour
 
         //Disable dash state
         dashCoroutining = false;
+
+        iFramesActive = false;
     }
 
     IEnumerator SlideAction()

@@ -34035,7 +34035,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.14
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -34088,8 +34088,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 8
-      minScalar: 6
+      scalar: 10
+      minScalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -34141,7 +34141,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.81568635, g: 0.909804, b: 0.9450981, a: 0.5882353}
+      minColor: {r: 0.57254905, g: 0.61960787, b: 0.74509805, a: 0.5882353}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -34206,7 +34206,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.15
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -34584,7 +34584,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 15
+    angle: 20
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -34789,7 +34789,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 50
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -38773,13 +38773,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199234873}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.579228, y: -0.40557972, z: 0.40557972, w: 0.579228}
+  m_LocalRotation: {x: -0.5930297, y: -0.38511795, z: 0.38511795, w: 0.5930297}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 473002198}
-  m_LocalEulerAnglesHint: {x: -20, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: -24, y: -90, z: 90}
 --- !u!1 &1237355691
 GameObject:
   m_ObjectHideFlags: 0
