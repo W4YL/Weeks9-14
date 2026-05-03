@@ -67,6 +67,10 @@ public class PlayerController : MonoBehaviour
     public float iFrameDuration = 1;
     public int maxDashCharge = 3;
 
+    //Hit stop times
+    public float HsDefault = 0.1f;
+    public float HsHighSlam = 0.3f;
+
     //Unity event
     public UnityEvent gotHit;
 
@@ -228,19 +232,27 @@ public class PlayerController : MonoBehaviour
             {
                 if (!highSlam)
                 {
-                    //Take one damage on normal slam
-                    slime.TakeSlamDamage();
-                }
-                else
-                {
                     //Start hitstop coroutine on high slam
-                    StartCoroutine(HitStopTimer());
+                    StartCoroutine(HitStopTimer(HsDefault));
 
                     //Freeze time
                     Time.timeScale = 0;
 
                     //Start post-hitstop coroutine for after hitstop functions
                     StartCoroutine(PostHitStopFunctions(slime));
+                }
+                else
+                {
+                    screenFlash.SetActive(true);
+
+                    //Start hitstop coroutine on high slam
+                    StartCoroutine(HitStopTimer(HsHighSlam));
+
+                    //Freeze time
+                    Time.timeScale = 0;
+
+                    //Start post-hitstop coroutine for after hitstop functions
+                    StartCoroutine(PostHighSlamHitStopFunctions(slime));
                 }
             }
         }
@@ -456,33 +468,36 @@ public class PlayerController : MonoBehaviour
         canSlamJump = false;
     }
 
-    IEnumerator HitStopTimer()
+    IEnumerator HitStopTimer(float duration)
     {
-        //Timer for hitstop interval 
-        float hitstopTimer = hitstopDuration;
-
         //Conditional to diable animation state transitions during hitstop
         exitHitstopState = false;
 
-        while (hitstopTimer > 0)
-        {
-            //Decrease unaffected timer during time freeze through the loop
-            hitstopTimer -= Time.unscaledDeltaTime;
+        Debug.Log(duration);
 
-            //Turns on screen flash UI image
-            screenFlash.SetActive(true);
-
-            yield return null;
-        }
-
-        //Turns off screen flash image after time freeze
-        screenFlash.SetActive(false);
+        yield return new WaitForSecondsRealtime(duration);
 
         //Set time to normal
         Time.timeScale = 1;
     }
 
     IEnumerator PostHitStopFunctions(SlimeBehaviour slime)
+    {
+        while (!(Time.timeScale == 1))
+        {
+            //Runs only after time has been turned back to normal
+            yield return null;
+        }
+
+        //Damages slime twice for an instant kill
+        slime.TakeSlamDamage();
+
+
+        //Unblocks animation state transitions
+        exitHitstopState = true;
+    }
+
+    IEnumerator PostHighSlamHitStopFunctions(SlimeBehaviour slime)
     {
         while(!(Time.timeScale == 1))
         {
@@ -494,9 +509,11 @@ public class PlayerController : MonoBehaviour
         slime.TakeSlamDamage();
         slime.TakeSlamDamage();
 
-
         //Unblocks animation state transitions
         exitHitstopState = true;
+
+        //Turns off screen flash image after time freeze
+        screenFlash.SetActive(false);
     }
 
     IEnumerator IFrames(float duration)

@@ -63661,6 +63661,8 @@ MonoBehaviour:
   knockBackStrength: 3
   iFrameDuration: 1
   maxDashCharge: 3
+  HsDefault: 0.05
+  HsHighSlam: 0.3
   gotHit:
     m_PersistentCalls:
       m_Calls:
